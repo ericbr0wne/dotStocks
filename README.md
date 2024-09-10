@@ -1,4 +1,4 @@
 # dotStocks
 
-- **Entity Framework for tables handling**  
+- **Entity Framework for handling tables**  
 - **SQL Server Management Studio for database**
