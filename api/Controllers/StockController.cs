@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using api.Data;
+using api.Dtos;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,16 @@ namespace api.Controllers
             }
             
             return Ok(stock.ToStockDto());
+
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        {
+            var stockModel = stockDto.ToStockFromCreateDTO();
+            _context.Stocks.Add(stockModel);
+            _context.SaveChanges();
+            return CreatedAtAction(nameof(GetbyId), new { id = stockModel.Id}, stockModel.ToStockDto());
 
         }
 
