@@ -10,9 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-
-            [Route("api/comment")]
-        [ApiController]
+    [Route("api/comment")]
+    [ApiController]
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepository _commentRepo;

@@ -11,4 +11,5 @@ namespace api.Interfaces
     {
         Task<List<Comment>> GetAllAsync();
     }
+    
 }
