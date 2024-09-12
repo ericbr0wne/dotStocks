@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using api.Dtos.Comment;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -73,6 +75,18 @@ namespace api.Controllers
             return Ok(comment.ToCommentDto());
 
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var commentModel =  await _commentRepo.DeleteAsync(id);
+
+            if(commentModel == null)
+            return NotFound("Comment does not exist");
+            return Ok(commentModel);
+        }
+
     
     }
 
