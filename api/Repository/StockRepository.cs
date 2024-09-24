@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using api.Helpers;
 using api.Interfaces;
+using api.Controllers;
 
 namespace api.Repository
 {
@@ -54,11 +55,6 @@ namespace api.Repository
             }
             return await stocks.ToListAsync();
        
-        }
-
-        public Task<List<Stock>> GetAllAsync(Controllers.QueryObject query)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Stock?> GetbyIdAsync(int id)

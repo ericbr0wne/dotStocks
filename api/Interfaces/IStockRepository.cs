@@ -6,6 +6,7 @@ using api.Controllers;
 using api.Dtos.Stock;
 using api.Models;
 using api.Interfaces;
+using api.Helpers;
 
 namespace api.Interfaces
 {
