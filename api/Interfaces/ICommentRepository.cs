@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage;
 using api.Models;
+using api.Helpers;
+using api.Controllers;
 
 namespace api.Interfaces
 {

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Stock;
-using api.Interfaces;
 using api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using api.Helpers;
+using api.Interfaces;
 
 namespace api.Repository
 {
@@ -38,11 +39,26 @@ namespace api.Repository
             return stockModel;
         }
 
-        public async Task<List<Stock>> GetAllSync()
+        public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
 
-            return await _context.Stocks.Include(c => c.Comments).ToListAsync();
+            var stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
+            if(!string.IsNullOrWhiteSpace(query.CompanyName))
+            {
+                stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+            }
+
+            if(!string.IsNullOrWhiteSpace(query.Symbol))
+            {
+                stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+            }
+            return await stocks.ToListAsync();
        
+        }
+
+        public Task<List<Stock>> GetAllAsync(Controllers.QueryObject query)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Stock?> GetbyIdAsync(int id)
